@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @reference.title %>
+</p>
+
+<p>
+  <strong>Authors:</strong>
+  <%= @reference.authors %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @reference.description %>
+</p>
+
+<p>
+  <strong>Publication date:</strong>
+  <%= @reference.publication_date %>
+</p>
+
+<p>
+  <strong>Registered date:</strong>
+  <%= @reference.registered_date %>
+</p>
+
+<%= link_to 'Edit', edit_reference_path(@reference) %> |
+<%= link_to 'Back', references_path %>

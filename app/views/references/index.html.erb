@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>References</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Authors</th>
+      <th>Description</th>
+      <th>Publication date</th>
+      <th>Registered date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @references.each do |reference| %>
+      <tr>
+        <td><%= reference.title %></td>
+        <td><%= reference.authors %></td>
+        <td><%= reference.description %></td>
+        <td><%= reference.publication_date %></td>
+        <td><%= reference.registered_date %></td>
+        <td><%= link_to 'Show', reference %></td>
+        <td><%= link_to 'Edit', edit_reference_path(reference) %></td>
+        <td><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reference', new_reference_path %>

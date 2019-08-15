@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Periodics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Qualis</th>
+      <th>Knowledgement area</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @periodics.each do |periodic| %>
+      <tr>
+        <td><%= periodic.name %></td>
+        <td><%= periodic.description %></td>
+        <td><%= periodic.qualis %></td>
+        <td><%= periodic.knowledgement_area %></td>
+        <td><%= link_to 'Show', periodic %></td>
+        <td><%= link_to 'Edit', edit_periodic_path(periodic) %></td>
+        <td><%= link_to 'Destroy', periodic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Periodic', new_periodic_path %>

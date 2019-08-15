@@ -1,0 +1,2 @@
+class Periodic < ApplicationRecord
+end

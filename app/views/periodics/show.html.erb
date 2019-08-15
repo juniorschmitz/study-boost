@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @periodic.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @periodic.description %>
+</p>
+
+<p>
+  <strong>Qualis:</strong>
+  <%= @periodic.qualis %>
+</p>
+
+<p>
+  <strong>Knowledgement area:</strong>
+  <%= @periodic.knowledgement_area %>
+</p>
+
+<%= link_to 'Edit', edit_periodic_path(@periodic) %> |
+<%= link_to 'Back', periodics_path %>
