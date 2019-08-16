@@ -61,6 +61,11 @@ development:
 test:
   <<: *default
   database: projeto_final_study_boost_test
+  # database: projeto_final_study_boost_development
+  username: docker
+  password: docker
+  host: 192.168.99.100
+  port: 5432
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
