@@ -1,5 +1,6 @@
 class ReferencesController < ApplicationController
   before_action :set_reference, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, :except => [:show, :index]
 
   # GET /references
   # GET /references.json
@@ -25,10 +26,11 @@ class ReferencesController < ApplicationController
   # POST /references.json
   def create
     @reference = Reference.new(reference_params)
+    @reference.user = current_user
 
     respond_to do |format|
       if @reference.save
-        format.html { redirect_to @reference, notice: 'Reference was successfully created.' }
+        format.html { redirect_to @reference, notice: 'Referência criada com sucesso.' }
         format.json { render :show, status: :created, location: @reference }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class ReferencesController < ApplicationController
   def update
     respond_to do |format|
       if @reference.update(reference_params)
-        format.html { redirect_to @reference, notice: 'Reference was successfully updated.' }
+        format.html { redirect_to @reference, notice: 'Referência atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @reference }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class ReferencesController < ApplicationController
   def destroy
     @reference.destroy
     respond_to do |format|
-      format.html { redirect_to references_url, notice: 'Reference was successfully destroyed.' }
+      format.html { redirect_to references_url, notice: 'Referência removida.' }
       format.json { head :no_content }
     end
   end

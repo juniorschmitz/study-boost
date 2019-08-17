@@ -1,5 +1,6 @@
 class PeriodicsController < ApplicationController
   before_action :set_periodic, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, :except => [:show, :index]
 
   # GET /periodics
   # GET /periodics.json
@@ -25,10 +26,11 @@ class PeriodicsController < ApplicationController
   # POST /periodics.json
   def create
     @periodic = Periodic.new(periodic_params)
+    @periodic.user = current_user
 
     respond_to do |format|
       if @periodic.save
-        format.html { redirect_to @periodic, notice: 'Periodic was successfully created.' }
+        format.html { redirect_to @periodic, notice: 'Periódico registrado com sucesso.' }
         format.json { render :show, status: :created, location: @periodic }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class PeriodicsController < ApplicationController
   def update
     respond_to do |format|
       if @periodic.update(periodic_params)
-        format.html { redirect_to @periodic, notice: 'Periodic was successfully updated.' }
+        format.html { redirect_to @periodic, notice: 'Periódico atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @periodic }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class PeriodicsController < ApplicationController
   def destroy
     @periodic.destroy
     respond_to do |format|
-      format.html { redirect_to periodics_url, notice: 'Periodic was successfully destroyed.' }
+      format.html { redirect_to periodics_url, notice: 'Periódico excluido com sucesso.' }
       format.json { head :no_content }
     end
   end
