@@ -29,6 +29,11 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
+# copying data from the CSV file to the PostgreSQL
+gem 'activerecord-import'
+gem 'awesome_print'
+gem 'pry'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

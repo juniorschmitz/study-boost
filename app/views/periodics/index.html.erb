@@ -9,7 +9,7 @@
       <th scope="col">Descrição</th>
       <th scope="col">Qualis</th>
       <th scope="col">Área de conhecimento</th>
-      <th scope="col">Responsável pelo cadastro</th>
+      <th scope="col">ISSN</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +21,7 @@
         <td><%= periodic.description %></td>
         <td><%= periodic.qualis %></td>
         <td><%= periodic.knowledgement_area %></td>
-        <td><%= periodic.user.email %></td>
+        <td><%= periodic.issn %></td>
         <% if user_signed_in? %>
           <td><%= link_to 'Mostrar', periodic %></td>
           <td><%= link_to 'Editar', edit_periodic_path(periodic) %></td>

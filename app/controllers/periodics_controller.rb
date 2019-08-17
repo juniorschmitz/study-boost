@@ -39,6 +39,20 @@ class PeriodicsController < ApplicationController
     end
   end
 
+  def create!
+    @periodic = Periodic.new(periodic_params)
+
+    respond_to do |format|
+      if @periodic.save
+        format.html { redirect_to @periodic, notice: 'Periódico registrado com sucesso.' }
+        format.json { render :show, status: :created, location: @periodic }
+      else
+        format.html { render :new }
+        format.json { render json: @periodic.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /periodics/1
   # PATCH/PUT /periodics/1.json
   def update
@@ -71,6 +85,6 @@ class PeriodicsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def periodic_params
-      params.require(:periodic).permit(:name, :description, :qualis, :knowledgement_area)
+      params.require(:periodic).permit(:name, :description, :qualis, :knowledgement_area, :issn)
     end
 end
