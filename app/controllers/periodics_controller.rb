@@ -5,7 +5,19 @@ class PeriodicsController < ApplicationController
   # GET /periodics
   # GET /periodics.json
   def index
-    @periodics = Periodic.all
+    @periodics_count = Periodic.all.count
+    @periodics = Periodic.paginate(page: params[:page], per_page: 55).order('created_at ASC')
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    # binding.pry
+    # find_periodic
+  end
+
+  def find_periodic
+    # IT WORKS, TRY HARDER AFTER THIS, INVOLVING A FORM FOR SEARCHING THE PERIODICS
+    @found = Periodic.where("qualis = 'B1' AND knowledgement_area LIKE '%SOCIOLOGIA%'")
   end
 
   # GET /periodics/1

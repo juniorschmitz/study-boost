@@ -6,13 +6,12 @@ class Periodic < ApplicationRecord
 
   belongs_to :user, optional: true
 
-
   def self.convert_to_utf8_encoding(original_file)  
     original_string = original_file.read
-    final_string = original_string.encode(invalid: :replace, undef: :replace, replace: '') #If you'd rather invalid characters be replaced with something else, do so here.
-    final_file = Tempfile.new('import') #No need to save a real File
+    final_string = original_string.encode(invalid: :replace, undef: :replace, replace: '')
+    final_file = Tempfile.new('import')
     final_file.write(final_string)
-    final_file.close #Don't forget me
+    final_file.close
     final_file
   end 
 

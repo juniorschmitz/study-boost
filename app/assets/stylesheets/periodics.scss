@@ -1,3 +1,31 @@
 // Place all the styles related to the periodics controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+html {
+background-image: url(http://subtlepatterns.com/patterns/bo_play_pattern.png);
+padding-top: 10px;
+}
+
+body {
+padding-top: 15px;
+padding-bottom: 20px;
+}
+
+.table th:empty {
+border: none;
+width: 1%;
+}
+
+#notice:empty {
+display: none;
+}
+
+select[name$="i)]"] {
+width: auto;
+display: inline-block;
+}
+
+// #periodicsTab {
+// display: none;
+// }

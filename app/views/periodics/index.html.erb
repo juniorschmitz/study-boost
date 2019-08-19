@@ -1,42 +1,69 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Periódicos</h1>
+<!-- <h4>Para realizar a busca relacionada, utilize a pesquisa abaixo: </h4>
+<%= link_to 'Busca relacionada', periodics_path, class: "btn btn-primary btn-sm" %> -->
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Nome</th>
-      <th scope="col">Descrição</th>
-      <th scope="col">Qualis</th>
-      <th scope="col">Área de conhecimento</th>
-      <th scope="col">ISSN</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!-- colocar o campo de busca aqui, e apresentar na página mesmo -->
 
-  <tbody>
-    <% @periodics.each do |periodic| %>
+
+
+
+
+
+<!-- 
+<h4>Para listar todos os periódicos cadastrados, utilize o botão abaixo: </h4>
+<button class="btn btn-primary btn-lg" onclick="showAllPeriodics()">Listar todos os periódicos</button> -->
+
+<!-- <%= link_to 'Listar todos os periódicos', periodics_path, class: "btn btn-primary btn-lg" %> -->
+
+<h2>Total de Periódicos cadastrados: <%= @periodics_count  %> </h2>
+
+<% if user_signed_in? %>
+  <%= link_to 'Novo Periódico', new_periodic_path, class: "btn btn-primary btn-md"%>
+<% end %>
+
+
+<div id="periodicsTab">
+  <h1>Listagem de todos os Periódicos</h1>
+
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= periodic.name %></td>
-        <td><%= periodic.description %></td>
-        <td><%= periodic.qualis %></td>
-        <td><%= periodic.knowledgement_area %></td>
-        <td><%= periodic.issn %></td>
-        <% if user_signed_in? %>
-          <td><%= link_to 'Mostrar', periodic %></td>
-          <td><%= link_to 'Editar', edit_periodic_path(periodic) %></td>
-          <td><%= link_to 'Excluir', periodic, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
-        <% end %>    
+        <th scope="col">Nome</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Qualis</th>
+        <th scope="col">Área de conhecimento</th>
+        <th scope="col">ISSN</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @periodics.each do |periodic| %>
+        <tr>
+          <td><%= periodic.name %></td>
+          <td><%= periodic.description %></td>
+          <td><%= periodic.qualis %></td>
+          <td><%= periodic.knowledgement_area %></td>
+          <td><%= periodic.issn %></td>
+          <% if user_signed_in? && !periodic.user.nil? %>
+            <% if periodic.user.id == current_user.id %>
+              <td><%= link_to 'Mostrar', periodic %></td>
+              <td><%= link_to 'Editar', edit_periodic_path(periodic) %></td>
+              <td><%= link_to 'Excluir', periodic, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
-<% if user_signed_in? %>
-  <%= link_to 'Novo Periódico', new_periodic_path %>
-<% end %>
+<div id="infinite-scrolling">
+  <%= will_paginate %>
+</div>
 
 <!-- 029 983 180 96 -->
 <!-- teste1@potato.com -->
