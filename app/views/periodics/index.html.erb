@@ -5,10 +5,24 @@
 
 <!-- colocar o campo de busca aqui, e apresentar na página mesmo -->
 
+<!-- <%= form_tag(periodics_path, method: "get") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Enter search term" %>
+  <%= submit_tag "Search" %>
+<% end %> -->
 
 
+<%= form_tag('/periodics', method: :get) do %>
+  
+  <%= label_tag "Selecione a área de conhecimento para buscar"%>
+  <%= select(:selected_knowledgement_area, "selected_knowledgement_area", @all_knowledgement_areas, { include_blank: true }) %>
 
+  <% @all_qualis.each do | qualis | %>
+   <%= label_tag qualis %>
+    <%= check_box(:selected_qualis, "selected_qualis", {:multiple => true}, qualis, nil) %>
+  <% end %>
 
+  <%= submit_tag 'Buscar' %>
+<% end %>
 
 <!-- 
 <h4>Para listar todos os periódicos cadastrados, utilize o botão abaixo: </h4>
@@ -24,7 +38,7 @@
 
 
 <div id="periodicsTab">
-  <h1>Listagem de todos os Periódicos</h1>
+  <h1><%= @listage_title %></h1>
 
   <table class="table">
     <thead>

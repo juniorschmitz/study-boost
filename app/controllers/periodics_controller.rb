@@ -5,19 +5,29 @@ class PeriodicsController < ApplicationController
   # GET /periodics
   # GET /periodics.json
   def index
+    @all_knowledgement_areas = Periodic.distinct.pluck(:knowledgement_area).compact.each(&:strip!)
+    @all_qualis = Periodic.distinct.pluck(:qualis).compact.each(&:strip!)
     @periodics_count = Periodic.all.count
-    @periodics = Periodic.paginate(page: params[:page], per_page: 55).order('created_at ASC')
-    respond_to do |format|
-      format.html
-      format.js
+
+    if params[:selected_knowledgement_area] && params[:selected_qualis]
+      @listage_title = 'Listagem de periódicos pesquisados'
+      @periodics = find_periodic(params[:selected_knowledgement_area], params[:selected_qualis]).paginate(page: params[:page], per_page: 80).order('created_at ASC')
+    else
+      @listage_title = 'Listagem de todos os periódicos'
+      @periodics = Periodic.paginate(page: params[:page], per_page: 39).order('created_at ASC')
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
-    # binding.pry
-    # find_periodic
   end
 
-  def find_periodic
-    # IT WORKS, TRY HARDER AFTER THIS, INVOLVING A FORM FOR SEARCHING THE PERIODICS
-    @found = Periodic.where("qualis = 'B1' AND knowledgement_area LIKE '%SOCIOLOGIA%'")
+  def find_periodic(knowledgement_area, qualis)
+    str = ''
+    qualis[:selected_qualis].each { |q| str += "'#{q.to_s}', "}
+    str = str.delete_suffix!(', ')
+    @found = Periodic.where("qualis IN (#{str}) AND knowledgement_area LIKE '%#{knowledgement_area[:selected_knowledgement_area]}%'")
+    @found
   end
 
   # GET /periodics/1
@@ -97,6 +107,6 @@ class PeriodicsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def periodic_params
-      params.require(:periodic).permit(:name, :description, :qualis, :knowledgement_area, :issn)
+      params.require(:periodic).permit(:name, :description, :qualis, :knowledgement_area, :issn, :selected_knowledgement_area, :selected_qualis)
     end
 end
