@@ -1,0 +1,44 @@
+<h2 style="text-align:center;">Editar <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :class => 'form-signin' }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email, class: 'sr-only' %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Endereço de e-mail' %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Ainda esperando a confirmação no e-mail: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <% if @minimum_password_length %>
+      <% @ar = "#{@minimum_password_length} caracteres no mínimo" %>
+    <% end %>
+    <%= f.label :password, class: 'sr-only' %><br />
+    <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: "Nova Senha (#{@ar} Caracteres no mínimo - Deixe em branco se não deseja alterar)" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, class: 'sr-only' %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', placeholder: 'Confirmação de Nova Senha' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password, class: 'sr-only' %><br />
+    <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control', placeholder: 'Senha atual' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Atualizar", class: 'btn btn-lg btn-primary btn-block' %>
+  </div>
+<% end %>
+
+<hr>
+<h3 style="text-align:center;">Cancelar minha conta</h3>
+
+<%= button_to "Cancelar minha conta", registration_path(resource_name), data: { confirm: "Tem certeza?" }, method: :delete, class: 'btn btn-lg btn-danger btn-block' %>
+
+<hr>
+<%= link_to "Voltar", :back, class: 'btn btn-lg btn-warning btn-block' %>
