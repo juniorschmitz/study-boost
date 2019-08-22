@@ -6,6 +6,9 @@ class Periodic < ApplicationRecord
 
   belongs_to :user, optional: true
 
+  def self.copy_db_from_excel(path)
+  end
+
   def self.convert_to_utf8_encoding(original_file)  
     original_string = original_file.read
     final_string = original_string.encode(invalid: :replace, undef: :replace, replace: '')
@@ -13,7 +16,7 @@ class Periodic < ApplicationRecord
     final_file.write(final_string)
     final_file.close
     final_file
-  end 
+  end
 
   def self.import! 
     the_file = convert_to_utf8_encoding(File.open('db/periodics_capes_2016.csv'))
