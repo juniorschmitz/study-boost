@@ -1,50 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<!-- <h4>Para realizar a busca relacionada, utilize a pesquisa abaixo: </h4>
-<%= link_to 'Busca relacionada', periodics_path, class: "btn btn-primary btn-sm" %> -->
-
-<!-- colocar o campo de busca aqui, e apresentar na página mesmo -->
-
-<!-- <%= form_tag(periodics_path, method: "get") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Enter search term" %>
-  <%= submit_tag "Search" %>
-<% end %> -->
-
+<h2 style="color: #33cc33;"><b> Para filtrar, utilize o formulário abaixo: </b></h2>
 
 <%= form_tag('/periodics', method: :get) do %>
   
-  <%= label_tag "Selecione a área de conhecimento para buscar"%>
-  <%= select(:selected_knowledgement_area, "selected_knowledgement_area", @all_knowledgement_areas, { include_blank: true }) %>
+  <h5 style="color: #33cc33;"><%= label_tag "Selecione a área de conhecimento"%></h5>
+  <div class="form-group">
+    <%= select(:selected_knowledgement_area, "selected_knowledgement_area", @all_knowledgement_areas, { include_blank: true }, class: 'form-control', placeholder: "batata") %>
+  </div>
 
-  <% @all_qualis.each do | qualis | %>
-   <%= label_tag qualis %>
-    <%= check_box(:selected_qualis, "selected_qualis", {:multiple => true}, qualis, nil) %>
-  <% end %>
 
-  <%= submit_tag 'Buscar' %>
+  <h5 style="color:  #33cc33;"><%= label_tag "Selecione todos qualis a serem incluídos na consulta"%></h5>
+  <div class="form-group">
+    <%= select_tag(:selected_qualis, options_for_select(@all_qualis), :multiple=>true, :required=>true, class: 'form-control') %> 
+  </div>
+
+  <%= submit_tag 'Filtrar', class: 'btn btn-success btn-block' %>
 <% end %>
 
-<!-- 
-<h4>Para listar todos os periódicos cadastrados, utilize o botão abaixo: </h4>
-<button class="btn btn-primary btn-lg" onclick="showAllPeriodics()">Listar todos os periódicos</button> -->
+<hr>
 
-<!-- <%= link_to 'Listar todos os periódicos', periodics_path, class: "btn btn-primary btn-lg" %> -->
-
-<h2>Total de Periódicos cadastrados: <%= @periodics_count  %> </h2>
-
+<h4 style="color: #6600ff;"><b> Periódicos retornados: </b></h2>
 <% if user_signed_in? %>
   <%= link_to 'Novo Periódico', new_periodic_path, class: "btn btn-primary btn-md"%>
 <% end %>
 
-
 <div id="periodicsTab">
-  <h1><%= @listage_title %></h1>
 
   <table class="table">
     <thead>
       <tr>
         <th scope="col">Nome</th>
-        <th scope="col">Descrição</th>
         <th scope="col">Qualis</th>
         <th scope="col">Área de conhecimento</th>
         <th scope="col">ISSN</th>
@@ -56,7 +42,6 @@
       <% @periodics.each do |periodic| %>
         <tr>
           <td><%= periodic.name %></td>
-          <td><%= periodic.description %></td>
           <td><%= periodic.qualis %></td>
           <td><%= periodic.knowledgement_area %></td>
           <td><%= periodic.issn %></td>
@@ -72,6 +57,21 @@
     </tbody>
   </table>
 </div>
+
+<hr>
+<h2 style="color: #6600ff;"><b><%= @listage_title %></b></h2>
+
+<div class="row">
+  <div class="col">
+    <h5 style="color: #6600ff;"><b>Total de Periódicos cadastrados: <%= @periodics_count  %> </b></h5>
+  </div>
+  <div class="col">
+    <h5 style="color: #6600ff;"><b> <%= @returned_results_txt %> </b></h5>
+  </div>
+</div>
+
+
+<hr>
 
 <br>
 

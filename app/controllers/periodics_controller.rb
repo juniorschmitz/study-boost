@@ -12,8 +12,10 @@ class PeriodicsController < ApplicationController
     if params[:selected_knowledgement_area] && params[:selected_qualis]
       @listage_title = 'Listagem de periódicos pesquisados'
       @periodics = find_periodic(params[:selected_knowledgement_area], params[:selected_qualis]).paginate(page: params[:page], per_page: 80).order('created_at ASC')
+      @returned_results_txt = "Total de Periódicos retornados na consulta: #{@periodics.size}"
     else
       @listage_title = 'Listagem de todos os periódicos'
+      @returned_results_txt = "Você ainda não realizou uma filtragem na busca"
       @periodics = Periodic.paginate(page: params[:page], per_page: 39).order('created_at ASC')
       respond_to do |format|
         format.html
@@ -24,7 +26,7 @@ class PeriodicsController < ApplicationController
 
   def find_periodic(knowledgement_area, qualis)
     str = ''
-    qualis[:selected_qualis].each { |q| str += "'#{q.to_s}', "}
+    qualis.each { |q| str += "'#{q.to_s}', "}
     str = str.delete_suffix!(', ')
     @found = Periodic.where("qualis IN (#{str}) AND knowledgement_area LIKE '%#{knowledgement_area[:selected_knowledgement_area]}%'")
     @found
