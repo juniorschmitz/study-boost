@@ -6,6 +6,8 @@ class Periodic < ApplicationRecord
 
   belongs_to :user, optional: true
 
+  validates_presence_of :name, :issn, :knowledgement_area, :qualis
+
   def self.copy_db_from_excel(path)
   end
 
