@@ -6,13 +6,13 @@
   
   <h5 style="color: #33cc33;"><%= label_tag "Selecione a área de conhecimento"%></h5>
   <div class="form-group">
-    <%= select(:selected_knowledgement_area, "selected_knowledgement_area", @all_knowledgement_areas, { include_blank: true }, class: 'form-control', placeholder: "batata") %>
+    <%= select_tag(:selected_knowledgement_area, options_for_select(@all_knowledgement_areas), :multiple=>true, :required=>true, class: 'form-control', placeholder: "batata") %>
   </div>
 
 
-  <h5 style="color:  #33cc33;"><%= label_tag "Selecione todos qualis a serem incluídos na consulta"%></h5>
+  <h5 style="color: #33cc33;"><%= label_tag "Selecione todos qualis a serem incluídos na consulta"%></h5>
   <div class="form-group">
-    <%= select_tag(:selected_qualis, options_for_select(@all_qualis), :multiple=>true, :required=>true, class: 'form-control') %> 
+    <%= select_tag(:selected_qualis, options_for_select(@all_qualis), :multiple=>true, :required=>true, class: 'form-control') %>
   </div>
 
   <%= submit_tag 'Filtrar', class: 'btn btn-success btn-block' %>

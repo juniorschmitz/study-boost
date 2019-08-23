@@ -26,9 +26,14 @@ class PeriodicsController < ApplicationController
 
   def find_periodic(knowledgement_area, qualis)
     str = ''
+    str_kn = ''
+
     qualis.each { |q| str += "'#{q.to_s}', "}
     str = str.delete_suffix!(', ')
-    @found = Periodic.where("qualis IN (#{str}) AND knowledgement_area LIKE '%#{knowledgement_area[:selected_knowledgement_area]}%'")
+
+    knowledgement_area.each { |k| str_kn += "'#{k.to_s}', "}
+    str_kn = str_kn.delete_suffix!(', ')
+    @found = Periodic.where("qualis IN (#{str}) AND knowledgement_area IN (#{str_kn})")
     @found
   end
 
