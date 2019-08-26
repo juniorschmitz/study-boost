@@ -34,7 +34,7 @@ gem 'activerecord-import'
 gem 'awesome_print'
 gem 'pry'
 gem 'will_paginate', '~> 3.1.7'
-gem 'bootstrap-sass', '~> 3.0.3.0'
+gem "bootstrap-sass", ">= 3.4.1"
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 
 # fix due to the vulnerabilities on the nokogiri gem
