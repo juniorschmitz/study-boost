@@ -25,15 +25,23 @@ require 'rails_helper'
 
 RSpec.describe ReferencesController, type: :controller do
 
+
+
+  before(:all) do
+    @user = FactoryBot.create(:user)
+  end
   # This should return the minimal set of attributes required to create a valid
   # Reference. As you add validations to Reference, be sure to
   # adjust the attributes here as well.
+
+  
+  
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { title: 'aaaaaaa', authors: 'aaaaaaaaaa', description: 'aaaaaaaaaaaa', publication_date: Date.today() - 7, registered_date: Date.today(), user: @user }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { title: 'aaaaaaa', authors: 'aaaaaaaaaa', description: 'aaaaaaaaaaaa', publication_date: 'dsadasd', registered_date: 'a', user: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -43,6 +51,7 @@ RSpec.describe ReferencesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
+      sign_in @user
       Reference.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
@@ -51,6 +60,7 @@ RSpec.describe ReferencesController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
+      sign_in @user
       reference = Reference.create! valid_attributes
       get :show, params: {id: reference.to_param}, session: valid_session
       expect(response).to be_successful
@@ -59,13 +69,17 @@ RSpec.describe ReferencesController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
+      sign_in @user
       get :new, params: {}, session: valid_session
+      # binding.pry
+      # sign_in @user
       expect(response).to be_successful
     end
   end
 
   describe "GET #edit" do
     it "returns a success response" do
+      sign_in @user
       reference = Reference.create! valid_attributes
       get :edit, params: {id: reference.to_param}, session: valid_session
       expect(response).to be_successful
@@ -75,12 +89,14 @@ RSpec.describe ReferencesController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Reference" do
+        sign_in @user
         expect {
           post :create, params: {reference: valid_attributes}, session: valid_session
         }.to change(Reference, :count).by(1)
       end
 
       it "redirects to the created reference" do
+        sign_in @user
         post :create, params: {reference: valid_attributes}, session: valid_session
         expect(response).to redirect_to(Reference.last)
       end
@@ -88,6 +104,7 @@ RSpec.describe ReferencesController, type: :controller do
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
+        sign_in @user
         post :create, params: {reference: invalid_attributes}, session: valid_session
         expect(response).to be_successful
       end
@@ -97,17 +114,11 @@ RSpec.describe ReferencesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { title: 'potato', authors: 'potato', description: 'potato', publication_date: Date.today() - 14, registered_date: Date.today(), user: User.new }
       }
 
-      it "updates the requested reference" do
-        reference = Reference.create! valid_attributes
-        put :update, params: {id: reference.to_param, reference: new_attributes}, session: valid_session
-        reference.reload
-        skip("Add assertions for updated state")
-      end
-
       it "redirects to the reference" do
+        sign_in @user
         reference = Reference.create! valid_attributes
         put :update, params: {id: reference.to_param, reference: valid_attributes}, session: valid_session
         expect(response).to redirect_to(reference)
@@ -116,6 +127,7 @@ RSpec.describe ReferencesController, type: :controller do
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
+        sign_in @user
         reference = Reference.create! valid_attributes
         put :update, params: {id: reference.to_param, reference: invalid_attributes}, session: valid_session
         expect(response).to be_successful
@@ -125,6 +137,7 @@ RSpec.describe ReferencesController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested reference" do
+      sign_in @user
       reference = Reference.create! valid_attributes
       expect {
         delete :destroy, params: {id: reference.to_param}, session: valid_session
@@ -132,6 +145,7 @@ RSpec.describe ReferencesController, type: :controller do
     end
 
     it "redirects to the references list" do
+      sign_in @user
       reference = Reference.create! valid_attributes
       delete :destroy, params: {id: reference.to_param}, session: valid_session
       expect(response).to redirect_to(references_url)
