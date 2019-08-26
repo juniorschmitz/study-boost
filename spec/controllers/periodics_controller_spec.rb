@@ -30,12 +30,12 @@ RSpec.describe PeriodicsController, type: :controller do
   # adjust the attributes here as well.
   let(:valid_attributes) {
     # skip("Add a hash of attributes valid for your model")
-    {"name" => "Potato" , "description" => "BLABALBLABLA", "qualis" => "B", "knowledgement_area" => "POTATO"}
+    {name: "Potato" , qualis: "B1", knowledgement_area: "POTATO"}
   }
 
   let(:invalid_attributes) {
     # skip("Add a hash of attributes invalid for your model")
-    {"name" => 1 , "description" => "BLABALBLABLA", "qualis" => 12, "knowledgement_area" => "POTATO"}
+    {"name" => 1, "qualis" => 12, "knowledgement_area" => "POTATO"}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -91,35 +91,6 @@ RSpec.describe PeriodicsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {periodic: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
-      end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested periodic" do
-        periodic = Periodic.create! valid_attributes
-        put :update, params: {id: periodic.to_param, periodic: new_attributes}, session: valid_session
-        periodic.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the periodic" do
-        periodic = Periodic.create! valid_attributes
-        put :update, params: {id: periodic.to_param, periodic: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(periodic)
-      end
-    end
-
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        periodic = Periodic.create! valid_attributes
-        put :update, params: {id: periodic.to_param, periodic: invalid_attributes}, session: valid_session
         expect(response).to be_successful
       end
     end
