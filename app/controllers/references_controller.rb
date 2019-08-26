@@ -27,6 +27,7 @@ class ReferencesController < ApplicationController
   def create
     @reference = Reference.new(reference_params)
     @reference.user = current_user
+    @reference.registered_date = Date.today()
 
     respond_to do |format|
       if @reference.save

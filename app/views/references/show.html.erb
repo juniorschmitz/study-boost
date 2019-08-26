@@ -1,29 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong>Título:</strong>
   <%= @reference.title %>
 </p>
 
 <p>
-  <strong>Authors:</strong>
+  <strong>Autores:</strong>
   <%= @reference.authors %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Descrição:</strong>
   <%= @reference.description %>
 </p>
 
 <p>
-  <strong>Publication date:</strong>
+  <strong>Data de publicação:</strong>
   <%= @reference.publication_date %>
 </p>
 
-<p>
-  <strong>Registered date:</strong>
-  <%= @reference.registered_date %>
-</p>
-
-<%= link_to 'Edit', edit_reference_path(@reference) %> |
-<%= link_to 'Back', references_path %>
+<%= link_to 'Editar', edit_reference_path(@reference), class: 'btn btn-primary btn-lg btn-block' %>
+<%= link_to 'Voltar', references_path, class: 'btn btn-warning btn-lg btn-block' %>

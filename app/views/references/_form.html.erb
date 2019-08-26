@@ -1,7 +1,7 @@
 <%= form_with(model: reference, local: true) do |form| %>
   <% if reference.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(reference.errors.count, "error") %> prohibited this reference from being saved:</h2>
+      <h2><%= pluralize(reference.errors.count, "error") %> impediu que o registro fosse salvo:</h2>
 
       <ul>
       <% reference.errors.full_messages.each do |message| %>
@@ -11,32 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="field form-group">
+    <%= form.label :title, class: 'sr-only' %>
+    <%= form.text_field :title, class: 'form-control', placeholder: 'Título do trabalho' %>
   </div>
 
-  <div class="field">
-    <%= form.label :authors %>
-    <%= form.text_field :authors %>
+  <div class="field form-group">
+    <%= form.label :authors, class: 'sr-only' %>
+    <%= form.text_field :authors, class: 'form-control', placeholder: 'Autores' %>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="field form-group">
+    <%= form.label :description, class: 'sr-only' %>
+    <%= form.text_area :description, class: 'form-control', placeholder: 'Descrição do trabalho' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :publication_date %>
-    <%= form.date_select :publication_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :registered_date %>
-    <%= form.date_select :registered_date %>
+    <%= form.date_select :publication_date, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submeter", class: 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>

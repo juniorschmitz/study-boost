@@ -1,15 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>References</h1>
+<h1>Suas Referências</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Authors</th>
-      <th>Description</th>
-      <th>Publication date</th>
-      <th>Registered date</th>
+      <th scope="col">Título</th>
+      <th scope="col">Autores</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Data de publicação</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,10 +20,9 @@
         <td><%= reference.authors %></td>
         <td><%= reference.description %></td>
         <td><%= reference.publication_date %></td>
-        <td><%= reference.registered_date %></td>
-        <td><%= link_to 'Show', reference %></td>
-        <td><%= link_to 'Edit', edit_reference_path(reference) %></td>
-        <td><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mostrar', reference, class: 'btn btn-primary btn-lg btn-block' %></td>
+        <td><%= link_to 'Editar', edit_reference_path(reference), class: 'btn btn-primary btn-lg btn-block' %></td>
+        <td><%= link_to 'Excluir', reference, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-lg btn-block' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Reference', new_reference_path %>
+<%= link_to 'Nova referência', new_reference_path, class: 'btn btn-primary btn-lg btn-block' %>
