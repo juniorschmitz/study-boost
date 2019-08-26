@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe "periodics/new", type: :view do
   before(:each) do
     assign(:periodic, Periodic.new(
-      :name => "MyString",
-      :description => "MyText",
-      :qualis => "MyString",
-      :knowledgement_area => "MyString"
+      :name => "Revista Brasileira de Computação",
+      :description => "Blablabla, blablabla",
+      :qualis => "B2",
+      :knowledgement_area => "Computação",
+      :issn => "1234-1234"
     ))
   end
 

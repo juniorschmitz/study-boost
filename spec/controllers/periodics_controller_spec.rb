@@ -25,16 +25,18 @@ require 'rails_helper'
 
 RSpec.describe PeriodicsController, type: :controller do
 
+  before(:all) do
+    @user = FactoryBot.create(:user)
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Periodic. As you add validations to Periodic, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    # skip("Add a hash of attributes valid for your model")
-    {name: "Potato" , qualis: "B1", knowledgement_area: "POTATO"}
+    { name: "Potato" , qualis: "B1", knowledgement_area: "POTATO", issn: '1234-1234' }
   }
 
   let(:invalid_attributes) {
-    # skip("Add a hash of attributes invalid for your model")
     {"name" => 1, "qualis" => 12, "knowledgement_area" => "POTATO"}
   }
 
@@ -61,6 +63,7 @@ RSpec.describe PeriodicsController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
+      sign_in @user
       get :new, params: {}, session: valid_session
       expect(response).to be_successful
     end
@@ -68,6 +71,7 @@ RSpec.describe PeriodicsController, type: :controller do
 
   describe "GET #edit" do
     it "returns a success response" do
+      sign_in @user
       periodic = Periodic.create! valid_attributes
       get :edit, params: {id: periodic.to_param}, session: valid_session
       expect(response).to be_successful
@@ -77,12 +81,14 @@ RSpec.describe PeriodicsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Periodic" do
+        sign_in @user
         expect {
           post :create, params: {periodic: valid_attributes}, session: valid_session
         }.to change(Periodic, :count).by(1)
       end
 
       it "redirects to the created periodic" do
+        sign_in @user
         post :create, params: {periodic: valid_attributes}, session: valid_session
         expect(response).to redirect_to(Periodic.last)
       end
@@ -90,6 +96,7 @@ RSpec.describe PeriodicsController, type: :controller do
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
+        sign_in @user
         post :create, params: {periodic: invalid_attributes}, session: valid_session
         expect(response).to be_successful
       end
@@ -98,6 +105,7 @@ RSpec.describe PeriodicsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested periodic" do
+      sign_in @user
       periodic = Periodic.create! valid_attributes
       expect {
         delete :destroy, params: {id: periodic.to_param}, session: valid_session
@@ -105,6 +113,7 @@ RSpec.describe PeriodicsController, type: :controller do
     end
 
     it "redirects to the periodics list" do
+      sign_in @user
       periodic = Periodic.create! valid_attributes
       delete :destroy, params: {id: periodic.to_param}, session: valid_session
       expect(response).to redirect_to(periodics_url)

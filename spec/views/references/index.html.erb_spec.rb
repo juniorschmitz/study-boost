@@ -2,16 +2,25 @@ require 'rails_helper'
 
 RSpec.describe "references/index", type: :view do
   before(:each) do
+    @user = FactoryBot.create(:user)
+    sign_in @user
+
     assign(:references, [
       Reference.create!(
         :title => "Title",
         :authors => "Authors",
-        :description => "MyText"
+        :description => "MyText",
+        :publication_date => Date.today() - 7,
+        :registered_date => Date.today(),
+        :user => @user
       ),
       Reference.create!(
         :title => "Title",
         :authors => "Authors",
-        :description => "MyText"
+        :description => "MyText",
+        :publication_date => Date.today() - 7,
+        :registered_date => Date.today(),
+        :user => @user
       )
     ])
   end

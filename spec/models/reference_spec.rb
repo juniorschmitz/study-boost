@@ -72,5 +72,4 @@ RSpec.describe Reference, type: :model do
     reference.user = User.new
     expect(reference).to_not be_valid
   end
-  # validates_presence_of :title, :authors, :description, :publication_date, :registered_date
 end
