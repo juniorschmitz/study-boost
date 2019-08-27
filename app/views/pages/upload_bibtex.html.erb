@@ -1,0 +1,6 @@
+<%= form_tag(pages_upload_bibtex_path, method: :post, :enctype =>"multipart/form-data") do %>
+    
+  <%= file_field_tag :bibtex_file %>
+
+  <%= submit_tag 'Enviar', class: 'btn btn-success btn-block' %>
+<% end %>

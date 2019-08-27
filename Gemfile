@@ -36,6 +36,7 @@ gem 'pry'
 gem 'will_paginate', '~> 3.1.7'
 gem "bootstrap-sass", ">= 3.4.1"
 gem 'bootstrap-will_paginate', '~> 0.0.10'
+gem 'bibtex-ruby', '~> 5.0'
 
 # fix due to the vulnerabilities on the nokogiri gem
 gem "nokogiri", ">= 1.10.4"

@@ -51,6 +51,8 @@ GEM
       execjs
     awesome_print (1.8.0)
     bcrypt (3.1.13)
+    bibtex-ruby (5.0.0)
+      latex-decode (~> 0.0)
     bindex (0.8.1)
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
@@ -103,6 +105,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
+    latex-decode (0.3.1)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -246,6 +249,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import
   awesome_print
+  bibtex-ruby (~> 5.0)
   bootstrap-sass (>= 3.4.1)
   bootstrap-will_paginate (~> 0.0.10)
   byebug
