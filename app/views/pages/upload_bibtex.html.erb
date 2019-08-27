@@ -1,6 +1,12 @@
+<h1 style="color: #33cc33;">Upload de referências a partir de arquivos .bib</h1>
+
 <%= form_tag(pages_upload_bibtex_path, method: :post, :enctype =>"multipart/form-data") do %>
     
   <%= file_field_tag :bibtex_file %>
 
-  <%= submit_tag 'Enviar', class: 'btn btn-success btn-block' %>
+  <%= submit_tag 'Realizar upload', class: 'btn btn-success btn-block' %>
 <% end %>
+
+<hr>
+
+<%= link_to 'Retornar para a visualização de suas referências', references_path, class: 'btn btn-info btn-lg btn-block' %>
