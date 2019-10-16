@@ -11,14 +11,15 @@ Funcionalidade: Acesso restrito
 Contexto: Usuário está na home page
   Dado que esteja na home page
 
-# @acessar_pagina_movies_usuario_deslogado
-# Cenário: Acessar a página de edição e cadastro de filmes com usuário deslogado
-#   Quando acessar a página de edição de filmes diretamenta pela url
-#   Então deverá aparecer a tela de login de usuário
+  @acessar_cadastro_referencias_logado
+  Cenário: Acessar a página de adição de referências bibliográficas sem estar logado
+    Quando acessar a página de adição de referências diretamente pela url
+    Então deve aparecer a tela de login do usuário
 
-# @acessar_pagina_movies_usuario_logado
-# Cenário: Acessar a página de edição e cadastro de filmes com usuário logado
-#   Quando clicar no botão de login
-#   E logar com o usuário potato@teste.com e senha 123456&
-#   E acessar a página de edição de filmes diretamenta pela url
-#   Então deverá aparecer uma opção de cadastro de novo filme
+  @acessar_cadastro_referencias_deslogado
+  Cenário: Acessar a página de adição de referências bibliográficas estando logado
+    Quando clico no botão de direcionamento para o login
+    E logo com o usuário "potato@teste.com" e senha "banana"
+    E acessar a página de edição de referências diretamente pela url
+    Então deve apresentar o formulário de cadastro de referências bibliográficas
+

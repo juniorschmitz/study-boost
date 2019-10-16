@@ -4,7 +4,7 @@ end
 
 Quando("clico no botão de direcionamento para o login") do
   @home_page.access_login_page
-  sleep 8
+  sleep 12
 end
 
 E("logo com o usuário {string} e senha {string}") do |email, password|

@@ -3,8 +3,9 @@ Before do
   @login_page = LoginPage.new
 
 
-  @user = User.new(:email => 'potato@teste.com', :password => '123456&', :password_confirmation => '123456&')
-  @user.save
+  # puts 'SALVANDO USUÁRIO...'
+  # @user = User.new(:email => 'potato@teste.com', :password => '123456&', :password_confirmation => '123456&')
+  # @user.save
 end
 
 def sc_path
